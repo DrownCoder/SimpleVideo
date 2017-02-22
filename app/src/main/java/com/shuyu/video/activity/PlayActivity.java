@@ -32,7 +32,7 @@ import com.shuyu.video.utils.DateUtils;
 import java.io.IOException;
 import java.util.List;
 
-public class PlayActivity extends AppCompatActivity implements View.OnClickListener {
+public class PlayActivity extends AppCompatActivity{
     private ImageView iv_id_back;
     private TextView tv_id_titile, tv_id_long, tv_id_title_main, tv_id_timelong_bottom, tv_id_online, tv_id_comment;
     private String time;
@@ -97,10 +97,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initEvents() {
-        iv_id_back.setOnClickListener(this);
-        tv_id_comment.setOnClickListener(this);
-        sv_id_video.setOnClickListener(this);
-        iv_id_control.setOnClickListener(this);
+        iv_id_back.setOnClickListener(onClickListener);
+        tv_id_comment.setOnClickListener(onClickListener);
+        sv_id_video.setOnClickListener(onClickListener);
+        iv_id_control.setOnClickListener(onClickListener);
 
         sb_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -257,50 +257,52 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         rcl_id_hotcomment = (RecyclerView) findViewById(R.id.rcl_id_hotcomment);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_id_back:
-                finish();
-                break;
-            case R.id.tv_id_comment:
-                final SelfDialog dialog = new SelfDialog(this);
-                dialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
-                    @Override
-                    public void onYesClick() {
-                        String comment = dialog.getComment();
-                        VideoComment videoComment = new VideoComment();
-                        videoComment.setContent(comment);
-                        adapter.addItem(videoComment);
-                        dialog.dismiss();
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.iv_id_back:
+                    finish();
+                    break;
+                case R.id.tv_id_comment:
+                    final SelfDialog dialog = new SelfDialog(PlayActivity.this);
+                    dialog.setYesOnclickListener("确定", new SelfDialog.onYesOnclickListener() {
+                        @Override
+                        public void onYesClick() {
+                            String comment = dialog.getComment();
+                            VideoComment videoComment = new VideoComment();
+                            videoComment.setContent(comment);
+                            adapter.addItem(videoComment);
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {
+                        @Override
+                        public void onNoClick() {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                    break;
+                case R.id.sv_id_video:
+                    showVideoUi();
+                    break;
+                case R.id.iv_id_control:
+                    if (player.isPlaying()) {
+                        iv_id_control.setImageResource(R.mipmap.play);
+                        position = player.getCurrentPosition();
+                        player.pause();
+                        handler.removeCallbacks(runnable);
+                    } else {
+                        iv_id_control.setImageResource(R.mipmap.pause);
+                        player.start();
+                        handler.sendEmptyMessage(MSG_UPDATE);
+                        //Play(position);
                     }
-                });
-                dialog.setNoOnclickListener("取消", new SelfDialog.onNoOnclickListener() {
-                    @Override
-                    public void onNoClick() {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-                break;
-            case R.id.sv_id_video:
-                showVideoUi();
-                break;
-            case R.id.iv_id_control:
-                if (player.isPlaying()) {
-                    iv_id_control.setImageResource(R.mipmap.play);
-                    position = player.getCurrentPosition();
-                    player.pause();
-                    handler.removeCallbacks(runnable);
-                } else {
-                    iv_id_control.setImageResource(R.mipmap.pause);
-                    player.start();
-                    handler.sendEmptyMessage(MSG_UPDATE);
-                    //Play(position);
-                }
-                break;
+                    break;
+            }
         }
-    }
+    };
 
   /*  private class MyCallBack implements SurfaceHolder.Callback {
         @Override

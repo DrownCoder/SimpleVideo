@@ -25,7 +25,7 @@ import com.shuyu.video.model.VideoPicDetails;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity{
     private TextView tvData;
 
     private FragmentManager manager;
@@ -111,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * 事件
      */
     private void initEvents() {
-        ll_id_main.setOnClickListener(this);
-        ll_id_vip.setOnClickListener(this);
-        ll_id_recommend.setOnClickListener(this);
-        ll_id_me.setOnClickListener(this);
+        ll_id_main.setOnClickListener(onClickListener);
+        ll_id_vip.setOnClickListener(onClickListener);
+        ll_id_recommend.setOnClickListener(onClickListener);
+        ll_id_me.setOnClickListener(onClickListener);
     }
 
     /**
@@ -223,42 +223,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv.setTextColor(getResources().getColor(R.color.app_main_color_pressed));
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.ll_id_main:
-                resetUI();
-                setUIClicked(iv_id_main,tv_id_main);
-                showFragment(mainFragment);
-                hideFragment(recommendFragment);
-                hideFragment(vipFragment);
-                hideFragment(meFragment);
-                break;
-            case R.id.ll_id_vip:
-                resetUI();
-                setUIClicked(iv_id_vip,tv_id_vip);
-                showFragment(vipFragment);
-                hideFragment(recommendFragment);
-                hideFragment(mainFragment);
-                hideFragment(meFragment);
-                break;
-            case R.id.ll_id_recommend:
-                resetUI();
-                setUIClicked(iv_id_recommend,tv_id_recommend);
-                showFragment(recommendFragment);
-                hideFragment(mainFragment);
-                hideFragment(vipFragment);
-                hideFragment(meFragment);
-                break;
-            case R.id.ll_id_me:
-                resetUI();
-                setUIClicked(iv_id_me,tv_id_me);
-                showFragment(meFragment);
-                hideFragment(recommendFragment);
-                hideFragment(vipFragment);
-                hideFragment(mainFragment);
-                break;
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ll_id_main:
+                    resetUI();
+                    setUIClicked(iv_id_main,tv_id_main);
+                    showFragment(mainFragment);
+                    hideFragment(recommendFragment);
+                    hideFragment(vipFragment);
+                    hideFragment(meFragment);
+                    break;
+                case R.id.ll_id_vip:
+                    resetUI();
+                    setUIClicked(iv_id_vip,tv_id_vip);
+                    showFragment(vipFragment);
+                    hideFragment(recommendFragment);
+                    hideFragment(mainFragment);
+                    hideFragment(meFragment);
+                    break;
+                case R.id.ll_id_recommend:
+                    resetUI();
+                    setUIClicked(iv_id_recommend,tv_id_recommend);
+                    showFragment(recommendFragment);
+                    hideFragment(mainFragment);
+                    hideFragment(vipFragment);
+                    hideFragment(meFragment);
+                    break;
+                case R.id.ll_id_me:
+                    resetUI();
+                    setUIClicked(iv_id_me,tv_id_me);
+                    showFragment(meFragment);
+                    hideFragment(recommendFragment);
+                    hideFragment(vipFragment);
+                    hideFragment(mainFragment);
+                    break;
+            }
         }
-    }
+    };
 }

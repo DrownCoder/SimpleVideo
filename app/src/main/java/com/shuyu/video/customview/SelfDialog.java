@@ -22,15 +22,11 @@ public class SelfDialog extends Dialog {
     private onYesOnclickListener yesOnclickListener;//确定按钮被点击了的监听器
 
     public SelfDialog(Context context) {
-        super(context);
+        this(context , 0);
     }
 
     public SelfDialog(Context context, int themeResId) {
         super(context, themeResId);
-    }
-
-    protected SelfDialog(Context context, boolean cancelable, OnCancelListener cancelListener) {
-        super(context, cancelable, cancelListener);
     }
 
     /**
