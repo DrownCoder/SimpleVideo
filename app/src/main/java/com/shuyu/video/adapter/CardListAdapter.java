@@ -62,8 +62,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.MViewH
             //holder.mgv_id_grid.setAdapter(new MGridAdapter(context,itemList));
             holder.mgv_id_grid.setAdapter(mGridAdapter);
             holder.mgv_id_grid.setOnItemClickListener(onItemClickListener);
-            SubChannel item = datas.getVideoChannelList().get(position);
-            holder.card_title.setText(item.getTitle());
+            holder.card_title.setText(datas.getVideoChannelList().get(position).getTitle());
         }
     }
 
