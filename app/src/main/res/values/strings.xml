@@ -1,0 +1,68 @@
+<resources>
+    <string name="nav_main">首页</string>
+    <string name="nav_vip">专辑</string>
+    <string name="nav_recommend">推荐</string>
+    <string name="nav_me">我的</string>
+
+    <string name="details">详情</string>
+    <string name="about">关于我们</string>
+    <string name="feedback">意见反馈</string>
+    <string name="service">联系客服</string>
+    <string name="update">版本更新</string>
+    <string name="clean_cache">清除缓存</string>
+    <string name="recommend">精品推荐</string>
+    <string name="disclaimer">免责声明</string>
+
+    <string name="user_account">您的专属帐号：%s</string>
+    <string name="user_password">密码：%s</string>
+
+    <string name="user_rule_tips">亲爱的\n您当前是：%s哦~</string>
+    <string name="user_no_rule_tips">亲爱的\n您还未成为会员哦~</string>
+
+    <string name="search">搜索</string>
+    <string name="api_error">网络异常，请稍后重试</string>
+
+    <string name="pd_loading">请稍后&#8230;</string>
+
+    <string name="pull_to_refresh_refreshing_label" translatable="false">@string/pd_loading</string>
+    <string name="pull_to_refresh_load_label" translatable="false">上拉加载更多</string>
+
+    <string name="pull_to_refresh_net_error_label">网络异常，上拉重试</string>
+    <string name="pull_to_refresh_no_data_label">暂无数据</string>
+    <string name="pull_to_refresh_down">loading</string>
+
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+    <string name="today">今天</string>
+    <string name="day">日</string>
+    <string name="year">年</string>
+    <string name="yesterday">昨天</string>
+    <string name="the_day_before_yesterday">前天</string>
+    <string name="morning">上午 %s</string>
+    <string name="noon">中午 %s</string>
+    <string name="afternoon">下午 %s</string>
+    <string name="evening">晚上 %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hot_mark">热门评论</string>
+    <string name="video_long">视频时长：</string>
+    <string name="online_num">观看人数：</string>
+    <string name="comment">我要评论</string>
+    <string name="tv_comment">留言</string>
+    <string name="please_comment">请输入评论......</string>
+    <string name="ok">确认</string>
+    <string name="no">取消</string>
+    <string name="download">下载</string>
+
+</resources>
