@@ -20,6 +20,7 @@ import com.shuyu.video.utils.DensityUtils;
 /**
  * Created by dengzhaoxuan on 2017/2/21.
  * 驾驶盘进度条
+ * 可以自定义
  */
 
 public class DriverProgress extends View{
