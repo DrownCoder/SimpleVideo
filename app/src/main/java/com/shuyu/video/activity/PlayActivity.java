@@ -158,73 +158,13 @@ public class PlayActivity extends AppCompatActivity{
         player = new MediaPlayer();
         rl_id_playui.setClickable(false);
         CreateSurface();
-        //sv_id_video.getHolder().addCallback(new MyCallBack());
-        //sv_id_video.getHolder().setKeepScreenOn();
-       /* try {
-            player.reset();
-            player.setDataSource(this, Uri.parse(details.getVideoUrl()));
-            holder=sv_id_video.getHolder();
-            holder.addCallback(new MyCallBack());
-            //异步准备 准备工作在子线程中进行 当播放网络视频时候一般采用此方法
-            player.prepareAsync();
-            player.setLooping(false);
-            player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    //progressBar.setVisibility(View.INVISIBLE);
-                    pb_id_video.setVisibility(View.GONE);
-                    rl_id_playui.setClickable(true);
-                    player.start();
-                    if(position>0) player.seekTo(position);
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         /**
          * 显示3s播放UI
          */
         showVideoUi();
     }
-/*    @Override
-    protected void onDestroy() {
-        player.release();
-        player = null;
-        super.onDestroy();
-    }
 
-    @Override
-    protected void onStop() {
-        player.pause();
-        super.onStop();
-    }*/
-
-    /*   private void play(int position) {
-           try {
-               player.reset();
-               player.setDataSource(this, Uri.parse(details.getVideoUrl()));
-               player.setDisplay(sv_id_video.getHolder());
-               player.prepareAsync();//缓冲
-               player.setOnPreparedListener(new PrepareListener(position));
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
-       private final class PrepareListener implements MediaPlayer.OnPreparedListener {
-           private int position;
-
-           public PrepareListener(int position) {
-               this.position = position;
-           }
-
-           public void onPrepared(MediaPlayer mp) {
-               pb_id_video.setVisibility(View.GONE);
-               rl_id_playui.setClickable(true);
-               player.start();
-               if(position>0) player.seekTo(position);
-           }
-       }*/
     private void showVideoUi() {
         rl_id_playui.setVisibility(View.VISIBLE);
         /**
@@ -304,28 +244,6 @@ public class PlayActivity extends AppCompatActivity{
         }
     };
 
-  /*  private class MyCallBack implements SurfaceHolder.Callback {
-        @Override
-        public void surfaceCreated(SurfaceHolder holder) {
-            //player.setDisplay(holder);
-            play(position);
-            position = 0;
-        }
-
-        @Override
-        public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-        }
-
-        @Override
-        public void surfaceDestroyed(SurfaceHolder holder) {
-            if(player.isPlaying()){
-                position = player.getCurrentPosition();
-                player.stop();
-            }
-        }
-    }
-*/
 
 
     /**
