@@ -72,7 +72,6 @@ public class PicFragment extends Fragment {
 
         //初始化Header数据
         viewList = new ArrayList<>();
-        Random random = new Random();
         for (int i = 0; i < 4; i++) {
             ImageView imageView = new ImageView(getContext());
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);

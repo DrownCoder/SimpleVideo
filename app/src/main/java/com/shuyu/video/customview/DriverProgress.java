@@ -10,7 +10,6 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.shuyu.video.R;
@@ -27,11 +26,11 @@ public class DriverProgress extends View{
     private Paint paint;
     private Context context;
     //仪表盘半径
-    private int PANEL_RADIUS = 70;
-    private final int PANEL_RADIUS_DEFALUT = 70;
+    private int PANEL_RADIUS = 150;
+    private final int PANEL_RADIUS_DEFALUT = 150;
     //仪表盘宽度
-    private int PANEL_WIDTH = 45;
-    private final int PANEL_WIDTH_DEFAULT = 45;
+    private int PANEL_WIDTH = 90;
+    private final int PANEL_WIDTH_DEFAULT = 90;
     //刻度表的密度
     private int PANEL_DENSITY = 10;
     private final int PANEL_DENSITY_DEFAULT  = 10;
@@ -45,8 +44,8 @@ public class DriverProgress extends View{
     private float PANEL_MAX = 100;
     private final int PANEL_MAX_DEFAULT  = 100;
     //指针大小
-    private int INDICATOR_RADIUS = 10;
-    private final int INDICATOR_RADIUS_DEFAULT  = 10;
+    private int INDICATOR_RADIUS = 20;
+    private final int INDICATOR_RADIUS_DEFAULT  = 20;
 
     public DriverProgress(Context context) {
         this(context,null);
@@ -61,6 +60,7 @@ public class DriverProgress extends View{
         this.context = context;
         this.paint = new Paint();
         initAttr(attrs,defStyleAttr);
+        initEvent();
     }
 
     private void initAttr(AttributeSet attrs, int defStyleAttr) {
@@ -98,6 +98,34 @@ public class DriverProgress extends View{
         a.recycle();
     }
 
+    /**
+     * 触摸事件
+     */
+    private void initEvent() {
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //圆心
+                float ix = PANEL_RADIUS + PANEL_WIDTH * 0.75f;
+                float iy = PANEL_RADIUS + PANEL_WIDTH * 0.75f - PANEL_POINT_RADIUS;
+                float x = event.getX();
+                float y = event.getY();
+
+                float yh = iy - y;//角对边
+                float progress;
+                //sin
+                float sin = yh / (PANEL_RADIUS + PANEL_WIDTH); //sin = 角对边 / 半径
+                if(x < ix){//度数<90 Math.asin 反三角函数
+                    progress = (float) ((float) Math.asin(sin) * 2 / Math.PI * PANEL_MAX);
+                }else{ //度数>90
+                    progress = (float) (PANEL_MAX - (float) Math.asin(sin) * 2 / Math.PI * PANEL_MAX);
+                }
+
+                setProgress(progress);
+                return true;
+            }
+        });
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec)
@@ -243,6 +271,48 @@ public class DriverProgress extends View{
         this.PANEL_PROGRESS = progress;
         invalidate();
     }
+    /**
+     * 设置仪表盘宽度
+     */
+    public void setPanelWidth(int PANEL_WIDTH) {
+        this.PANEL_WIDTH = PANEL_WIDTH;
+        invalidate();
+    }
+    /**
+     * 设置半径
+     */
+    public void setPanelRadius(int PANEL_RADIUS) {
+        this.PANEL_RADIUS = PANEL_RADIUS;
+        invalidate();
+    }
+    /**
+     * 设置指针长度
+     */
+    public void setIndicatorRadius(int INDICATOR_RADIUS) {
+        this.INDICATOR_RADIUS = INDICATOR_RADIUS;
+        invalidate();
+    }
+    /**
+     * 设置精度
+     */
+    public void setPanelDensity(int PANEL_DENSITY) {
+        if(PANEL_DENSITY > 0){
+            this.PANEL_DENSITY = PANEL_DENSITY;
+            invalidate();
+        }
+    }
+    /**
+     * 重置
+     */
+    public void resetView(){
+        this.PANEL_PROGRESS = PANEL_PROGRESS_DEFAULT;
+        this.PANEL_WIDTH = PANEL_WIDTH_DEFAULT;
+        this.INDICATOR_RADIUS = INDICATOR_RADIUS_DEFAULT;
+        this.PANEL_DENSITY = PANEL_DENSITY_DEFAULT;
+        this.PANEL_RADIUS = PANEL_RADIUS_DEFALUT;
+        invalidate();
+    }
+
     /**
      * 启动动画
      */

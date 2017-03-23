@@ -25,9 +25,7 @@ import com.shuyu.video.model.VideoPicDetails;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity{
-    private TextView tvData;
-
+public class MainActivity extends BaseActivity{
     private FragmentManager manager;
 
     private FragmentTransaction transaction;
@@ -58,22 +56,9 @@ public class MainActivity extends AppCompatActivity{
         initFragment();
         initDatas();
         initEvents();
-
-        BaseApi.request(BaseApi.createApi(IServiceApi.class).getChannelList(),
-                new BaseApi.IResponseListener<List<ChannelTitle>>() {
-                    @Override
-                    public void onSuccess(List<ChannelTitle> data) {
-                        tvData.setText(data.toString());
-                    }
-
-                    @Override
-                    public void onFail() {
-
-                    }
-                });
     }
 
-    private void initDatas() {
+    public void initDatas() {
         /**
          * 获取vip数据
          */
@@ -110,7 +95,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * 事件
      */
-    private void initEvents() {
+    public void initEvents() {
         ll_id_main.setOnClickListener(onClickListener);
         ll_id_vip.setOnClickListener(onClickListener);
         ll_id_recommend.setOnClickListener(onClickListener);
@@ -136,7 +121,7 @@ public class MainActivity extends AppCompatActivity{
         currentFragment = mainFragment;
     }
 
-    private void initViews() {
+    public void initViews() {
         ll_id_main = (LinearLayout) findViewById(R.id.ll_id_main);
         ll_id_vip = (LinearLayout) findViewById(R.id.ll_id_vip);
         ll_id_recommend = (LinearLayout) findViewById(R.id.ll_id_recommend);

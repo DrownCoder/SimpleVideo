@@ -1,14 +1,24 @@
 package com.shuyu.video.activity;
 
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by dengzhaoxuan on 2017/2/22.
  */
 
-public abstract class BaseActivity extends Activity{
+public abstract class BaseActivity extends AppCompatActivity {
+    /**
+     * 初始化组件
+     */
     public abstract void initViews();
-    public abstract void initDatas();
-    public abstract void initEvents();
 
+    /**
+     * 初始化数据
+     */
+    public abstract void initDatas();
+
+    /**
+     * 初始化事件
+     */
+    public abstract void initEvents();
 }

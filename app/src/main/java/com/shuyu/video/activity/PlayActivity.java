@@ -1,7 +1,6 @@
 package com.shuyu.video.activity;
 
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
@@ -26,7 +25,6 @@ import com.shuyu.video.api.IServiceApi;
 import com.shuyu.video.customview.SelfDialog;
 import com.shuyu.video.model.VideoComment;
 import com.shuyu.video.model.VideoPicDetails;
-import com.shuyu.video.service.VideoService;
 import com.shuyu.video.utils.DateUtils;
 
 import java.io.IOException;
@@ -34,7 +32,8 @@ import java.util.List;
 
 public class PlayActivity extends AppCompatActivity{
     private ImageView iv_id_back;
-    private TextView tv_id_titile, tv_id_long, tv_id_title_main, tv_id_timelong_bottom, tv_id_online, tv_id_comment;
+    private TextView tv_id_titile, tv_id_long, tv_id_title_main, tv_id_timelong_bottom,
+            tv_id_online, tv_id_comment;
     private String time;
 
     private RelativeLayout rl_id_playui;
@@ -69,9 +68,6 @@ public class PlayActivity extends AppCompatActivity{
         public void run() {
             // TODO Auto-generated method stub
             if(sb_progress.getProgress()>=sb_progress.getMax()){
-                // playmusicbu.setImageResource(R.mipmap.pause);
-                //Toast.makeText(MainActivity.this,"下一首",Toast.LENGTH_SHORT).show();
-                //cycleViewPager.setCurrentItem(++mCurrentIndex);
                 sb_progress.setProgress(0);
             }else{
                 //Log.i("run","run");
@@ -202,6 +198,7 @@ public class PlayActivity extends AppCompatActivity{
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.iv_id_back:
+                    handler.removeCallbacks(runnable);
                     finish();
                     break;
                 case R.id.tv_id_comment:
@@ -286,11 +283,12 @@ public class PlayActivity extends AppCompatActivity{
     private void ReleasePlayer() {
         if (player != null) {
             player.stop();
+            player.reset();
             player.release();
             player = null;
         }
 
-    }
+}
 
     /**
      * 暂停

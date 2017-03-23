@@ -1,19 +1,16 @@
 package com.shuyu.video;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 import android.util.Base64;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
-import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.shuyu.video.api.BasicParamsInterceptor;
 import com.shuyu.video.api.CacheInterceptor;
@@ -21,6 +18,7 @@ import com.shuyu.video.utils.CommonUtils;
 import com.shuyu.video.utils.Constants;
 import com.shuyu.video.utils.LogUtils;
 import com.shuyu.video.utils.SPUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -49,6 +47,7 @@ public class MyApplication extends Application {
         initImageLoader();
         LogUtils.isDebug = Constants.IS_DEBUG;
         SPUtils.put(this, Constants.STAY_TIME_ON, System.currentTimeMillis());
+        LeakCanary.install(this);
     }
 
     private void initImageLoader() {
